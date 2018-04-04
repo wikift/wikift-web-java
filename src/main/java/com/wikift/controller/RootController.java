@@ -17,30 +17,24 @@
  */
 package com.wikift.controller;
 
-import com.wikift.common.WikiftConstant;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * HomeController <br/>
- * 描述 : HomeController <br/>
+ * RootController <br/>
+ * 描述 : RootController <br/>
  * 作者 : qianmoQ <br/>
  * 版本 : 1.0 <br/>
- * 创建时间 : 2018-04-03 上午10:33 <br/>
+ * 创建时间 : 2018-04-04 上午11:32 <br/>
  * 联系作者 : <a href="mailTo:shichengoooo@163.com">qianmoQ</a>
  */
 @Controller
-public class HomeController {
+public class RootController {
 
-    /**
-     * 站点首页
-     *
-     * @return 站点首页模板路径
-     */
-    @RequestMapping(value = {"/", "index"}, method = RequestMethod.GET)
-    public String indexOrRoot() {
-        return WikiftConstant.INDEX_ANF_ROOT_PAGE_TEMPLATE;
+    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
+    public String index() {
+        return "redirect:/index";
     }
 
 }

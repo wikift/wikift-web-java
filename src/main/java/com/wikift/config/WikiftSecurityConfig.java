@@ -71,11 +71,11 @@ public class WikiftSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests().
-                antMatchers("/").permitAll()
+                antMatchers("/", "/index/**").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/authentication")
                 .defaultSuccessUrl("/").permitAll()
-                .and().logout().logoutSuccessUrl("/wikift-authentication/login").permitAll();
+                .and().logout().logoutSuccessUrl("/authentication").permitAll();
     }
 
     @Override

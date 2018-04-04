@@ -94,7 +94,7 @@ public class WikiftAuthenticationProvider implements AuthenticationProvider {
                     JwtTokenEntity jwtToken = (JwtTokenEntity) jwtTemplate.decodedJwtTokenBody(successCredentials.getAccess_token(), JwtTokenEntity.class);
                     List<GrantedAuthority> grantedAuthoritys = new ArrayList<>();
                     Arrays.asList(jwtToken.getAuthorities()).forEach(grant -> {
-                        grantedAuthoritys.add(new SimpleGrantedAuthority(grant));
+                        grantedAuthoritys.add(new SimpleGrantedAuthority("ROLE_" + grant));
                     });
                     return new UsernamePasswordAuthenticationToken(username, password, grantedAuthoritys);
                 } else {

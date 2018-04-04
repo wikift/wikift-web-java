@@ -1,0 +1,67 @@
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:fragment="common-navigation">
+    <header class="header">
+        <div class="navigation-trigger hidden-xl-up" data-ma-action="aside-open" data-ma-target=".sidebar">
+            <div class="navigation-trigger__inner">
+                <i class="navigation-trigger__line"></i>
+                <i class="navigation-trigger__line"></i>
+                <i class="navigation-trigger__line"></i>
+            </div>
+        </div>
+        <!-- 顶部站点标题 -->
+        <div class="header__logo hidden-sm-down">
+            <h1><a href="/">Wikift 1.0</a></h1>
+        </div>
+        <!-- 顶部搜索表单 -->
+        <form class="search">
+            <div class="search__inner">
+                <input type="text" class="search__text" placeholder="搜索: 用户, 文章, 空间...">
+                <i class="zmdi zmdi-search search__helper" data-ma-action="search-close"></i>
+            </div>
+        </form>
+        <!-- 顶部菜单 -->
+        <ul class="top-nav">
+            <!-- 个人工具 -->
+            <li th:if="${session.SPRING_SECURITY_CONTEXT}" class="dropdown hidden-xs-down">
+                <a href="" data-toggle="dropdown"><i class="zmdi zmdi-apps"></i></a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu--block" role="menu">
+                    <div class="row app-shortcuts">
+                        <a class="col-4 app-shortcuts__item" [routerLink]="['/article/create']">
+                            <i class="zmdi zmdi-file-text bg-blue"></i>
+                            <small class="">写文章</small>
+                        </a>
+                        <a class="col-4 app-shortcuts__item" [routerLink]="['/space']">
+                            <i class="zmdi zmdi-assignment bg-teal"></i>
+                            <small class="">专栏/空间</small>
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <li th:if="${session.SPRING_SECURITY_CONTEXT}" class="hidden-xs-down">
+                <a href="" data-ma-action="aside-open" data-ma-target=".chat" class="top-nav__notify">
+                    <i class="zmdi zmdi-comment-alt-text"></i>
+                </a>
+            </li>
+            <li th:unless="${session.SPRING_SECURITY_CONTEXT}" class="d-none d-sm-inline-block">
+                <a th:href="@{/authentication}" class="btn btn-info waves-effect">登录</a>
+            </li>
+        </ul>
+    </header>
+</div>

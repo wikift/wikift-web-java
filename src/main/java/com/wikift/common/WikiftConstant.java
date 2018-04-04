@@ -32,6 +32,11 @@ public class WikiftConstant {
 
     public static String INDEX_ANF_ROOT_PAGE_TEMPLATE = "index";
 
+    /**
+     * 首页navbar导航根路径
+     */
+    public static String INDEX_NAVBAR_TEMPLATE_ROOT_PATH = "wikift-index/wikift-index-navbar-";
+
     public static String AUTHENTICATION_LOGIN_PAGE_TEMPLATE = "wikift-authentication/login";
 
 }

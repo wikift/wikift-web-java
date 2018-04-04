@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>用户登录 - Wikift</title>
-    <link rel="stylesheet" th:href="@{/ws/wikift-css/wikift-style.css}">
-</head>
+<head th:include="wikift-layout/common/wikift-layout-common-header::common-header('用户登录', '用户登录')"></head>
 <body data-ma-theme="green">
 <!-- login from -->
 <form action="" method="post">
     <div class="login">
         <div class="login__block active">
             <div class="login__block__header">
+                <i class="zmdi zmdi-account-circle"></i>
                 欢迎使用Wikift系统
             </div>
             <div class="login__block__body">

@@ -11441,6 +11441,7 @@ textarea {
     align-items: center;
     padding: 15px 2.1rem;
     transition: background-color 300ms;
+    border-bottom: 1px solid #eee;
 }
 
 .listview__img {

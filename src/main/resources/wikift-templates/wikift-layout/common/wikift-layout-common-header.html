@@ -15,24 +15,13 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<!-- 引入header -->
-<head th:include="wikift-layout/common/wikift-layout-common-header::common-header('首页', '首页')"></head>
-<!-- 引入script脚本 -->
-<div th:include="wikift-layout/common/wikift-layout-common-script::common-script"></div>
-<body data-ma-theme="green">
-<!-- 引入navigation菜单栏 -->
-<div th:include="wikift-layout/common/wikift-layout-common-navigation::common-navigation"></div>
-<section class="content content--full">
-    <div class="row">
-        <div class="col-md-9">
-            <div th:include="wikift-layout/index/wikift-layout-index-navbar::index-navbar(1)"></div>
-            <div th:include="wikift-layout/index/wikift-layout-index-navbar-data::index-navbar-data(${result})"></div>
-        </div>
-        <div class="col-md-3">
-        </div>
-    </div>
-</section>
-</body>
-</html>
+<head th:fragment="common-header(title, description)">
+    <meta charset="utf-8"/>
+    <title th:text="${title}"> - Wikift</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta th:content="${description}" name="description"/>
+    <meta content="qianmoQ" name="author"/>
+    <link rel="stylesheet" th:href="@{/ws/wikift-css/wikift-style.css}">
+    <link rel="stylesheet" th:href="@{/ws/wikift-vender/css/material-design-iconic/css/material.design.iconic.min.css}">
+</head>
