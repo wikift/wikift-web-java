@@ -18,6 +18,7 @@
 package com.wikift.controller;
 
 import com.wikift.common.HttpTemplate;
+import com.wikift.common.PageTemplate;
 import com.wikift.common.WikiftConstant;
 import com.wikift.entity.RemoteServerEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,9 @@ import org.springframework.core.env.Environment;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * IndexController <br/>
@@ -45,14 +46,20 @@ public class IndexController {
     private HttpTemplate httpTemplate;
 
     @Autowired
+    private PageTemplate pageTemplate;
+
+    @Autowired
     private Environment environment;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = {"", "/{page}/{size}"}, method = RequestMethod.GET)
     public String index(Model model,
-                        @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
-                        @RequestParam(value = "size", defaultValue = "10", required = false) Integer size) {
+                        @PathVariable(value = "page", required = false) Integer page,
+                        @PathVariable(value = "size", required = false) Integer size) {
+        PageTemplate.PageEntity pageEntity = pageTemplate.checkPageParam(page, size);
         RemoteServerEntity remoteServer = new RemoteServerEntity(environment);
-        String result = httpTemplate.getRemoteResponseToString(remoteServer.fullPath() + "public/article/list?orderBy=NATIVE_CREATE_TIME");
+        String result = httpTemplate.getRemoteResponseToString(remoteServer.fullPath() +
+                "public/article/list?orderBy=NATIVE_CREATE_TIME&page=" + (pageEntity.getPage() - 1)
+                + "&size=" + pageEntity.getSize());
         model.addAttribute("result", result);
         return WikiftConstant.INDEX_ANF_ROOT_PAGE_TEMPLATE;
     }
@@ -62,31 +69,37 @@ public class IndexController {
         return "redirect:/index";
     }
 
-    @RequestMapping(value = {"navbar/hottest"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"navbar/hottest", "navbar/hottest/{page}/{size}"}, method = RequestMethod.GET)
     public String navbarHottest(Model model,
-                                @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
-                                @RequestParam(value = "size", defaultValue = "10", required = false) Integer size) {
+                                @PathVariable(value = "page", required = false) Integer page,
+                                @PathVariable(value = "size", required = false) Integer size) {
+        PageTemplate.PageEntity pageEntity = pageTemplate.checkPageParam(page, size);
         RemoteServerEntity remoteServer = new RemoteServerEntity(environment);
-        String result = httpTemplate.getRemoteResponseToString(remoteServer.fullPath() + "public/article/list?orderBy=VIEW");
+        String result = httpTemplate.getRemoteResponseToString(remoteServer.fullPath() +
+                "public/article/list?orderBy=VIEW&page=" + (pageEntity.getPage() - 1)
+                + "&size=" + pageEntity.getSize());
         model.addAttribute("hottest", result);
         return WikiftConstant.INDEX_NAVBAR_TEMPLATE_ROOT_PATH + "hottest";
     }
 
-    @RequestMapping(value = {"navbar/recommend"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"navbar/recommend", "navbar/recommend/{page}/{size}"}, method = RequestMethod.GET)
     public String navbarRecommend(Model model,
-                                  @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
-                                  @RequestParam(value = "size", defaultValue = "10", required = false) Integer size) {
+                                  @PathVariable(value = "page", required = false) Integer page,
+                                  @PathVariable(value = "size", required = false) Integer size) {
+        PageTemplate.PageEntity pageEntity = pageTemplate.checkPageParam(page, size);
         RemoteServerEntity remoteServer = new RemoteServerEntity(environment);
-        String result = httpTemplate.getRemoteResponseToString(remoteServer.fullPath() + "public/article/list?orderBy=FABULOU");
+        String result = httpTemplate.getRemoteResponseToString(remoteServer.fullPath() +
+                "public/article/list?orderBy=FABULOU&page=" + (pageEntity.getPage() - 1)
+                + "&size=" + pageEntity.getSize());
         model.addAttribute("hottest", result);
         return WikiftConstant.INDEX_NAVBAR_TEMPLATE_ROOT_PATH + "recommend";
     }
 
     @PreAuthorize(value = "hasRole('USER')")
-    @RequestMapping(value = {"navbar/forme"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"navbar/forme", "navbar/forme/{page}/{size}"}, method = RequestMethod.GET)
     public String navbarForme(Model model,
-                              @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
-                              @RequestParam(value = "size", defaultValue = "10", required = false) Integer size) {
+                              @PathVariable(value = "page", required = false) Integer page,
+                              @PathVariable(value = "size", required = false) Integer size) {
 //        RemoteServerEntity remoteServer = new RemoteServerEntity(environment);
 //        String result = httpTemplate.getRemoteResponseToString(remoteServer.fullPath() + "public/article/list?orderBy=FABULOU");
 //        model.addAttribute("forme", result);

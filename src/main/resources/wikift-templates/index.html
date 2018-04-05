@@ -29,6 +29,7 @@
         <div class="col-md-9">
             <div th:include="wikift-layout/index/wikift-layout-index-navbar::index-navbar(1)"></div>
             <div th:include="wikift-layout/index/wikift-layout-index-navbar-data::index-navbar-data(${result})"></div>
+            <div th:include="wikift-layout/common/wikift-layout-common-pagination::common-pagination('index', ${result})"></div>
         </div>
         <div class="col-md-3">
         </div>

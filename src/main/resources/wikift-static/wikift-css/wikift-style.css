@@ -4488,6 +4488,13 @@ tbody.collapse.show {
     border-color: #2196F3;
 }
 
+.page-item.active-for-three-page .page-link {
+    z-index: 2;
+    color: #FFFFFF;
+    background-color: #2ebcfc;
+    border-color: #2196F3;
+}
+
 .page-item.disabled .page-link {
     color: #8a8a8a;
     pointer-events: none;
