@@ -6,37 +6,35 @@
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
- * <p>
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.wikift.common;
-
-/**
- * WikiftConstant <br/>
- * 描述 : WikiftConstant <br/>
- * 作者 : qianmoQ <br/>
- * 版本 : 1.0 <br/>
- * 创建时间 : 2018-04-03 上午10:35 <br/>
- * 联系作者 : <a href="mailTo:shichengoooo@163.com">qianmoQ</a>
- */
-public class WikiftConstant {
-
-    public static String CONFIG_WEB_PREFIX = "wikift.web.config";
-    public static String CONFIG_SERVER_PREFIX = "wikift.server.config";
-
-    public static String INDEX_ANF_ROOT_PAGE_TEMPLATE = "index";
-
+'use strict';
+$(document).ready(function () {
     /**
-     * 首页navbar导航根路径
+     * 表单数据检查:当有数据时,输入框进入激活状态
      */
-    public static String INDEX_NAVBAR_TEMPLATE_ROOT_PATH = "wikift-index/wikift-index-navbar-";
-
-    public static String AUTHENTICATION_LOGIN_PAGE_TEMPLATE = "wikift-authentication/wikift-login";
-
-}
+    if ($('.form-group--float')[0]) {
+        $('.form-group--float').each(function () {
+            var p = $(this).find('.form-control').val()
+            if (!p.length == 0) {
+                $(this).find('.form-control').addClass('form-control--active');
+            }
+        });
+        $('body').on('blur', '.form-group--float .form-control', function () {
+            var i = $(this).val();
+            if (i.length == 0) {
+                $(this).removeClass('form-control--active');
+            }
+            else {
+                $(this).addClass('form-control--active');
+            }
+        });
+    }
+});
