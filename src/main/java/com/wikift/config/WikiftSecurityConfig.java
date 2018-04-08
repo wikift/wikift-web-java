@@ -79,7 +79,7 @@ public class WikiftSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage(WikiftConstant.COMMON_MENU_AUTHENTICATION)
                 .successHandler(wikiftAuthenticationSuccessHandler).permitAll()
-                .and().logout().logoutSuccessUrl("/authentication").permitAll();
+                .and().logout().logoutSuccessUrl(WikiftConstant.COMMON_MENU_AUTHENTICATION).permitAll();
     }
 
     @Override

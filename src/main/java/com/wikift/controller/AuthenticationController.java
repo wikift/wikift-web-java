@@ -18,9 +18,16 @@
 package com.wikift.controller;
 
 import com.wikift.common.WikiftConstant;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * AuthenticationController <br/>
@@ -34,9 +41,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "authentication")
 public class AuthenticationController {
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String authenticationLogin() {
         return WikiftConstant.TEMPLATE_AUTHENTICATION_LOGIN_PAGE_PATH;
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String authenticationLogout(HttpServletRequest request, HttpServletResponse response) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!ObjectUtils.isEmpty(authentication)) {
+            // 从spring security中退出当前登录的用户
+            new SecurityContextLogoutHandler().logout(request, response, authentication);
+        }
+        // 清空当前用户的session数据
+        request.getSession().invalidate();
+        return "redirect:" + WikiftConstant.COMMON_MENU_AUTHENTICATION + "?logout";
     }
 
 }

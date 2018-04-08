@@ -40,7 +40,7 @@ public class WikiftConstant {
     /**
      * 全局导航
      */
-    public static String COMMON_MENU_AUTHENTICATION = "/authentication";
+    public static String COMMON_MENU_AUTHENTICATION = "/authentication/login";
     public static String COMMON_MENU_ROOT = "/";
 
     /**
