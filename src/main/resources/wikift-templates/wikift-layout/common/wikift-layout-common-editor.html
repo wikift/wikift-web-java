@@ -1,0 +1,55 @@
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:fragment="common-editor">
+    <link rel="stylesheet" th:href="@{/ws/wikift-vender/css/editor/editor.css}">
+    <script th:src="@{/ws/wikift-vender/js/editor/editor.min.js}"></script>
+    <script th:src="@{/ws/wikift-js/entity/wikift-editor-config-entity.js}"></script>
+    <script th:src="@{/ws/wikift-js/entity/wikift-editor-entity.js}"></script>
+    <script th:src="@{/ws/wikift-js/common/wikift-common-editor.js}"></script>
+    <div th:include="wikift-layout/common/wikift-layout-common-script-notify::common-script-notify"></div>
+    <div id="wikift-editor"></div>
+    <footer class="editor-footer">
+        <form method="post">
+            <div class="editor-footer-view">
+                <div class="listview__content">
+                    <div class="listview__heading"><%:=list[i].title%></div>
+                </div>
+                <div class="listview__content__right center">
+                    <button type="submit" class="btn btn-primary btn-publish">发布文章</button>
+                </div>
+            </div>
+        </form>
+    </footer>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var editor = new WikiftEditorEntity('wikift-editor');
+        var config = new WikiftEditorConfigEntity();
+        config.libPath = '/ws/wikift-vender/js/editor/lib/';
+        config.height = $(window).height() - $('header').height() - 15 - $('footer').height();
+        WikiftCommonEditor.initEditor(editor, config);
+        $('.btn-publish').click(function () {
+            var notify = new WikiftNotifyEntity('错误', '文章内容不能为空!!!');
+            var config = new WikiftNotifyConfigEntity();
+            config.type = 'danger';
+            WikiftCommonNotify.initNotify(notify, config);
+            return false;
+        });
+        /*]]>*/
+    </script>
+</div>

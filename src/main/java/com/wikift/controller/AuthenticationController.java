@@ -18,6 +18,7 @@
 package com.wikift.controller;
 
 import com.wikift.common.WikiftConstant;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -46,6 +47,7 @@ public class AuthenticationController {
         return WikiftConstant.TEMPLATE_AUTHENTICATION_LOGIN_PAGE_PATH;
     }
 
+    @PreAuthorize("hasRole('USER')")
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String authenticationLogout(HttpServletRequest request, HttpServletResponse response) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

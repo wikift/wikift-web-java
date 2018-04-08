@@ -14433,3 +14433,16 @@ span.flatpickr-weekday {
 .mt-10 {
     margin-top: 10px;
 }
+
+.editor-footer {
+    height: 42px;
+    padding: 0;
+}
+
+.editor-footer-view {
+    display: flex;
+    align-items: center;
+    padding: 5px 2.1rem;
+    transition: background-color 300ms;
+    border-bottom: 1px solid #eee;
+}
