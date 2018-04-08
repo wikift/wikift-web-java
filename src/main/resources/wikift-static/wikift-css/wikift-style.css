@@ -3031,6 +3031,13 @@ tbody.collapse.show {
     position: relative;
 }
 
+.dropdown--img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    vertical-align: top;
+}
+
 .dropdown-toggle::after {
     display: inline-block;
     width: 0;
@@ -14421,4 +14428,8 @@ span.flatpickr-weekday {
 
 .waves-block {
     display: block;
+}
+
+.mt-10 {
+    margin-top: 10px;
 }

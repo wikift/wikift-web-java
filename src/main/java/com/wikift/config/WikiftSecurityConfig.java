@@ -18,6 +18,7 @@
 package com.wikift.config;
 
 import com.wikift.common.WikiftConstant;
+import com.wikift.handler.WikiftAuthenticationSuccessHandler;
 import com.wikift.provider.WikiftAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -51,6 +52,9 @@ public class WikiftSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private WikiftAuthenticationProvider wikiftAuthenticationProvider;
 
+    @Autowired
+    private WikiftAuthenticationSuccessHandler wikiftAuthenticationSuccessHandler;
+
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
@@ -73,8 +77,8 @@ public class WikiftSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().
                 antMatchers("/", "/index/**").permitAll()
                 .anyRequest().authenticated()
-                .and().formLogin().loginPage("/authentication")
-                .defaultSuccessUrl("/").permitAll()
+                .and().formLogin().loginPage(WikiftConstant.COMMON_MENU_AUTHENTICATION)
+                .successHandler(wikiftAuthenticationSuccessHandler).permitAll()
                 .and().logout().logoutSuccessUrl("/authentication").permitAll();
     }
 

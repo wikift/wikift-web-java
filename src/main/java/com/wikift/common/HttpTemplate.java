@@ -27,6 +27,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * HttpTemplate <br/>
@@ -44,21 +45,34 @@ public class HttpTemplate {
     @Autowired
     private HttpClient client;
 
-    private HttpResponse getRemoteResponse(String url) throws IOException {
+    private HttpResponse getRemoteResponse(String url, Map<String, String> headers) throws IOException {
         HttpGet get = new HttpGet(url);
+        if (!ObjectUtils.isEmpty(headers) && headers.size() > 0) {
+            headers.keySet().forEach(v -> {
+                get.setHeader(v, headers.get(v));
+            });
+        }
         return client.execute(get);
     }
 
     public String getRemoteResponseToString(String url) {
-        return this.getRemoteResponseToString(url, default_encoding);
+        return this.getRemoteResponseToString(url, default_encoding, null);
     }
 
     public String getRemoteResponseToString(String url, String encoding) {
+        return this.getRemoteResponseToString(url, encoding, null);
+    }
+
+    public String getRemoteResponseToString(String url, Map<String, String> headers) {
+        return this.getRemoteResponseToString(url, default_encoding, headers);
+    }
+
+    public String getRemoteResponseToString(String url, String encoding, Map<String, String> headers) {
         if (StringUtils.isEmpty(url) || StringUtils.isEmpty(encoding)) {
             throw new RuntimeException("url and encoding must no null");
         }
         try {
-            HttpResponse response = this.getRemoteResponse(url);
+            HttpResponse response = this.getRemoteResponse(url, headers);
             if (!ObjectUtils.isEmpty(response)) {
                 return EntityUtils.toString(response.getEntity(), encoding);
             }

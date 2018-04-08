@@ -59,6 +59,16 @@
                     <i class="zmdi zmdi-comment-alt-text"></i>
                 </a>
             </li>
+            <li th:if="${session.SPRING_SECURITY_CONTEXT}" class="dropdown hidden-xs-down">
+                <a href="" data-toggle="dropdown">
+                    <img class="dropdown--img" th:src="${session.userInfo.avatar}">
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu--block">
+                    <div class="listview listview--hover">
+                        <div class="listview__header" th:text="${session.userInfo.username}"></div>
+                    </div>
+                </div>
+            </li>
             <li th:unless="${session.SPRING_SECURITY_CONTEXT}" class="d-none d-sm-inline-block">
                 <a th:href="@{/authentication}" class="btn btn-info waves-effect">登录</a>
             </li>

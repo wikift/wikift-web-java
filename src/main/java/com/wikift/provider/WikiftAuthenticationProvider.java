@@ -18,6 +18,8 @@
 package com.wikift.provider;
 
 import com.google.gson.Gson;
+import com.wikift.cache.WikiftCache;
+import com.wikift.cache.WikiftCacheManager;
 import com.wikift.common.JwtTemplate;
 import com.wikift.common.WikiftConstant;
 import com.wikift.entity.BadCredentialsEntity;
@@ -68,6 +70,9 @@ public class WikiftAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     private JwtTemplate jwtTemplate;
 
+    @Autowired
+    private WikiftCacheManager cacheManager;
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String encoding = environment.getProperty(WikiftConstant.CONFIG_WEB_PREFIX + ".encoding");
@@ -96,6 +101,11 @@ public class WikiftAuthenticationProvider implements AuthenticationProvider {
                     Arrays.asList(jwtToken.getAuthorities()).forEach(grant -> {
                         grantedAuthoritys.add(new SimpleGrantedAuthority("ROLE_" + grant));
                     });
+                    WikiftCache cache = new WikiftCache();
+                    cache.setKey(WikiftConstant.CACHE_AUTHENTICATION_TOKEN);
+                    cache.setValue(successCredentials.getAccess_token());
+                    cache.setTimeOut(0);
+                    cacheManager.put(WikiftConstant.CACHE_AUTHENTICATION_TOKEN, cache);
                     return new UsernamePasswordAuthenticationToken(username, password, grantedAuthoritys);
                 } else {
                     System.out.println(gson.toJson(result));

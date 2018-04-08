@@ -15,28 +15,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.wikift.controller;
-
-import com.wikift.common.WikiftConstant;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+package com.wikift.cache;
 
 /**
- * AuthenticationController <br/>
- * 描述 : AuthenticationController <br/>
+ * WikiftCacheListener <br/>
+ * 描述 : WikiftCacheListener <br/>
  * 作者 : qianmoQ <br/>
  * 版本 : 1.0 <br/>
- * 创建时间 : 2018-04-03 上午10:50 <br/>
+ * 创建时间 : 2018-04-08 上午11:37 <br/>
  * 联系作者 : <a href="mailTo:shichengoooo@163.com">qianmoQ</a>
  */
-@Controller
-@RequestMapping(value = "authentication")
-public class AuthenticationController {
+public class WikiftCacheListener {
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public String authenticationLogin() {
-        return WikiftConstant.TEMPLATE_AUTHENTICATION_LOGIN_PAGE_PATH;
+    private WikiftCacheManager cacheManager;
+
+    public WikiftCacheListener(WikiftCacheManagerImpl cacheManager) {
+        this.cacheManager = cacheManager;
+    }
+
+    public void listen() {
+        new Thread(() -> {
+            cacheManager.getAllKeys().stream().filter(key -> cacheManager.timeOut(key)).forEach(key -> cacheManager.clear(key));
+        }).start();
     }
 
 }

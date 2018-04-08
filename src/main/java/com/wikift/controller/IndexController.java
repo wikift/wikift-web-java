@@ -61,7 +61,7 @@ public class IndexController {
                 "public/article/list?orderBy=NATIVE_CREATE_TIME&page=" + (pageEntity.getPage() - 1)
                 + "&size=" + pageEntity.getSize());
         model.addAttribute("result", result);
-        return WikiftConstant.INDEX_ANF_ROOT_PAGE_TEMPLATE;
+        return WikiftConstant.TEMPLATE_INDEX_AND_ROOT_PAGE_PATH;
     }
 
     @RequestMapping(value = {"navbar/latest"}, method = RequestMethod.GET)
@@ -79,7 +79,7 @@ public class IndexController {
                 "public/article/list?orderBy=VIEW&page=" + (pageEntity.getPage() - 1)
                 + "&size=" + pageEntity.getSize());
         model.addAttribute("hottest", result);
-        return WikiftConstant.INDEX_NAVBAR_TEMPLATE_ROOT_PATH + "hottest";
+        return WikiftConstant.TEMPLATE_INDEX_NAVBAR_AND_ROOT_PAGE_PATH + "hottest";
     }
 
     @RequestMapping(value = {"navbar/recommend", "navbar/recommend/{page}/{size}"}, method = RequestMethod.GET)
@@ -92,7 +92,7 @@ public class IndexController {
                 "public/article/list?orderBy=FABULOU&page=" + (pageEntity.getPage() - 1)
                 + "&size=" + pageEntity.getSize());
         model.addAttribute("hottest", result);
-        return WikiftConstant.INDEX_NAVBAR_TEMPLATE_ROOT_PATH + "recommend";
+        return WikiftConstant.TEMPLATE_INDEX_NAVBAR_AND_ROOT_PAGE_PATH + "recommend";
     }
 
     @PreAuthorize(value = "hasRole('USER')")
@@ -103,7 +103,7 @@ public class IndexController {
 //        RemoteServerEntity remoteServer = new RemoteServerEntity(environment);
 //        String result = httpTemplate.getRemoteResponseToString(remoteServer.fullPath() + "public/article/list?orderBy=FABULOU");
 //        model.addAttribute("forme", result);
-        return WikiftConstant.INDEX_NAVBAR_TEMPLATE_ROOT_PATH + "forme";
+        return WikiftConstant.TEMPLATE_INDEX_NAVBAR_AND_ROOT_PAGE_PATH + "forme";
     }
 
 }

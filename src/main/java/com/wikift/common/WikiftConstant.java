@@ -30,13 +30,22 @@ public class WikiftConstant {
     public static String CONFIG_WEB_PREFIX = "wikift.web.config";
     public static String CONFIG_SERVER_PREFIX = "wikift.server.config";
 
-    public static String INDEX_ANF_ROOT_PAGE_TEMPLATE = "index";
+    /**
+     * 页面模板
+     */
+    public static String TEMPLATE_INDEX_AND_ROOT_PAGE_PATH = "index";
+    public static String TEMPLATE_INDEX_NAVBAR_AND_ROOT_PAGE_PATH = "wikift-index/wikift-index-navbar-";
+    public static String TEMPLATE_AUTHENTICATION_LOGIN_PAGE_PATH = "wikift-authentication/wikift-login";
 
     /**
-     * 首页navbar导航根路径
+     * 全局导航
      */
-    public static String INDEX_NAVBAR_TEMPLATE_ROOT_PATH = "wikift-index/wikift-index-navbar-";
+    public static String COMMON_MENU_AUTHENTICATION = "/authentication";
+    public static String COMMON_MENU_ROOT = "/";
 
-    public static String AUTHENTICATION_LOGIN_PAGE_TEMPLATE = "wikift-authentication/wikift-login";
+    /**
+     * 缓冲常量
+     */
+    public static String CACHE_AUTHENTICATION_TOKEN = "authenticationToken";
 
 }

@@ -17,42 +17,28 @@
  */
 package com.wikift.config;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.google.gson.Gson;
-import com.wikift.common.JwtTemplate;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
+import com.wikift.cache.WikiftCacheManager;
+import com.wikift.cache.WikiftCacheManagerImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
 
 /**
- * WikiftCommonConfig <br/>
- * 描述 : WikiftCommonConfig <br/>
+ * WikiftCacheConfig <br/>
+ * 描述 : WikiftCacheConfig <br/>
  * 作者 : qianmoQ <br/>
  * 版本 : 1.0 <br/>
- * 创建时间 : 2018-04-03 下午4:07 <br/>
+ * 创建时间 : 2018-04-08 上午11:00 <br/>
  * 联系作者 : <a href="mailTo:shichengoooo@163.com">qianmoQ</a>
  */
 @Configuration
-public class WikiftCommonConfig {
+public class WikiftCacheConfig {
 
     @Bean
-    @Description(value = "wikift gson instance")
-    public Gson gson() {
-        return new Gson();
-    }
-
-    @Bean
-    @Description(value = "wikift httpclien instance")
-    public CloseableHttpClient client() {
-        return HttpClients.createDefault();
-    }
-
-    @Bean
-    @Description(value = "wikift jwt parse instance")
-    public JwtTemplate jwtTemplate() {
-        return JwtTemplate.build();
+    @Description(value = "wikift system cache config")
+    public WikiftCacheManager cacheManager() {
+        WikiftCacheManager cacheManager = new WikiftCacheManagerImpl();
+        return cacheManager;
     }
 
 }
