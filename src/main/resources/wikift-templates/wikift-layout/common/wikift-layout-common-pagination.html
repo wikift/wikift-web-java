@@ -17,11 +17,13 @@
 -->
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <div th:fragment="common-pagination(root, result)">
+    <input type="hidden" id="totalElements" th:value="${result.data.totalElements}"/>
+    <input type="hidden" id="totalPages" th:value="${result.data.totalPages}"/>
+    <input type="hidden" id="number" th:value="${result.data.number}"/>
+    <input type="hidden" id="size" th:value="${result.data.size}"/>
     <ul class="pagination justify-content-center mt-10"></ul>
     <script th:inline="javascript">
         /*<![CDATA[*/
-        // 抽取分页数据
-        var result = [[${result}]];
         $('.pagination').pagination({
             mode: 'fixed',
             coping: true,
@@ -29,16 +31,16 @@
             endPage: '末页',
             prevContent: '上页',
             nextContent: '下页',
-            totalData: result.data.totalElements,
-            pageCount: result.data.totalPages,
-            showData: result.data.size,
-            current: result.data.number + 1,
+            totalData: $('#totalElements').val(),
+            pageCount: $('#totalPages').val(),
+            showData: $('#size').val(),
+            current: $('#number').val() + 1,
             callback: function (api) {
                 var currentRoot = window.document.location.href;
                 var pathName = window.document.location.pathname;
                 var pos = currentRoot.indexOf(pathName);
                 var localhostPath = currentRoot.substring(0, pos);
-                window.location.href = localhostPath + '/' + [[${root}]] + '/' + api.getCurrent() + '/' + result.data.size;
+                window.location.href = localhostPath + '/' + [[${root}]] + '/' + api.getCurrent() + '/' + $('#size').val();
             }
         });
         /*]]>*/
