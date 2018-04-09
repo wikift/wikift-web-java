@@ -15,9 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-function WikiftNotifyEntity(title, message, icon, config) {
-    this.title = title;
-    this.message = message;
-    this.icon = icon;
-    this.config = config;
+function WikiftRemoteSpaceEntity(id, avatar, name, code, privated, description, user) {
+    this.id = id;
+    this.avatar = avatar;
+    this.name = name;
+    this.code = code;
+    this.privated = privated;
+    this.description = description;
+    this.user = user;
 }

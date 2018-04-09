@@ -17,7 +17,9 @@
  */
 package com.wikift.controller;
 
+import com.wikift.cache.WikiftCacheManager;
 import com.wikift.common.WikiftConstant;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -42,6 +44,9 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping(value = "authentication")
 public class AuthenticationController {
 
+    @Autowired
+    private WikiftCacheManager cacheManager;
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String authenticationLogin() {
         return WikiftConstant.TEMPLATE_AUTHENTICATION_LOGIN_PAGE_PATH;
@@ -57,6 +62,8 @@ public class AuthenticationController {
         }
         // 清空当前用户的session数据
         request.getSession().invalidate();
+        // 清空当前缓冲的用户token数据
+        cacheManager.clear(WikiftConstant.CACHE_AUTHENTICATION_TOKEN);
         return "redirect:" + WikiftConstant.COMMON_MENU_AUTHENTICATION + "?logout";
     }
 

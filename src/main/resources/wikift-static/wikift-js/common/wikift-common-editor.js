@@ -79,21 +79,9 @@ var WikiftCommonEditor = function () {
         CODE_EDITOR.redo();
     };
 
-    var highlightSearch = function (keyword) {
-
-    }
-
-    /**
-     * highlight line
-     * @param line
-     */
-    var highlightLine = function (line) {
-        CODE_EDITOR.addLineClass(line, 'background', 'CodeMirror-error-line-background');
-    }
-
-    var getCodeEditor = function () {
+    var getEditor = function () {
         return CODE_EDITOR;
-    }
+    };
 
     return {
         initEditor: initEditor,
@@ -102,9 +90,7 @@ var WikiftCommonEditor = function () {
         clearValue: clearValue,
         undoValue: undoValue,
         redoValue: redoValue,
-        highlightSearch: highlightSearch,
-        highlightLine: highlightLine,
-        getCodeEditor: getCodeEditor
+        getEditor: getEditor
     }
 
 }();

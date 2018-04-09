@@ -17,30 +17,30 @@
  */
 package com.wikift.config;
 
-import com.wikift.cache.WikiftCacheManager;
-import com.wikift.cache.WikiftCacheManagerImpl;
+import com.wikift.filter.OauthTokenFilter;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Description;
 import org.springframework.core.annotation.Order;
 
 /**
- * WikiftCacheConfig <br/>
- * 描述 : WikiftCacheConfig <br/>
+ * WikiftFilterConfig <br/>
+ * 描述 : WikiftFilterConfig <br/>
  * 作者 : qianmoQ <br/>
  * 版本 : 1.0 <br/>
- * 创建时间 : 2018-04-08 上午11:00 <br/>
+ * 创建时间 : 2018-04-09 上午11:21 <br/>
  * 联系作者 : <a href="mailTo:shichengoooo@163.com">qianmoQ</a>
  */
 @Configuration
-@Order(value = 1)
-public class WikiftCacheConfig {
+public class WikiftFilterConfig {
 
-    @Bean
-    @Description(value = "wikift system cache config")
-    public WikiftCacheManager cacheManager() {
-        WikiftCacheManager cacheManager = new WikiftCacheManagerImpl();
-        return cacheManager;
-    }
+//    @Bean
+//    public FilterRegistrationBean oauthTokenFilter() {
+//        FilterRegistrationBean bean = new FilterRegistrationBean();
+//        bean.setFilter(new OauthTokenFilter());
+//        bean.setName("oauthTokenFilter");
+//        bean.setOrder(10);
+//        return bean;
+//    }
 
 }

@@ -15,9 +15,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-function WikiftNotifyEntity(title, message, icon, config) {
-    this.title = title;
-    this.message = message;
-    this.icon = icon;
-    this.config = config;
-}
+var WikiftCommonSelect2 = function () {
+
+    var initSelect2 = function (select2, config) {
+        if (config !== 'undefiend' || config !== '' || config !== null) {
+            config = initConfig(config);
+        }
+        $(select2.id).select2(config);
+    };
+
+    /**
+     * init properties
+     * @returns {{}}
+     */
+    var initConfig = function (config) {
+        var options = {};
+        options.dropdownAutoWidth = config.dropdownAutoWidth;
+        options.width = config.width;
+        options.dropdownParent = config.dropdownParent;
+        return options;
+        throw Error('wikift notify config is error!');
+    };
+
+    return {
+        initSelect2: initSelect2
+    }
+
+}();

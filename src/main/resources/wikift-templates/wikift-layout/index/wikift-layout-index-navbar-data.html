@@ -21,21 +21,21 @@
     <!-- 文章内容模板 -->
     <script id="articleTemplate" type="text/html">
         <%for(var i = 0; i < list.length; i++) {%>
-        <div class="listview listview--hover">
-            <a class="listview__item" href="">
-                <img src="<%:=list[i].user.avatar%>" alt="<%:=list[i].user.username%>" class="listview__img"/>
-                <div class="listview__content">
-                    <div class="listview__heading"><%:=list[i].title%></div>
-                    <p>共有<em> <%:=list[i].viewCount%>次浏览 </em>,
-                        <em> <%:=list[i].commentsCount%> </em>次评论,
-                        <em> <%:=list[i].fabulouCount%> </em>次赞赏</p>
-                </div>
-                <div class="listview__content__right center">
-                    <h4><em><%:=list[i].viewCount%></em></h4>
-                    <h6>阅读量</h6>
-                </div>
-            </a>
-        </div>
+            <div class="listview listview--hover">
+                <a class="listview__item" href="">
+                    <img src="<%:=list[i].user.avatar%>" alt="<%:=list[i].user.username%>" class="listview__img"/>
+                    <div class="listview__content">
+                        <div class="listview__heading"><%:=list[i].title%></div>
+                        <p>共有<em> <%:=list[i].viewCount%>次浏览 </em>,
+                            <em> <%:=list[i].commentsCount%> </em>次评论,
+                            <em> <%:=list[i].fabulouCount%> </em>次赞赏</p>
+                    </div>
+                    <div class="listview__content__right center">
+                        <h4><em><%:=list[i].viewCount%></em></h4>
+                        <h6>阅读量</h6>
+                    </div>
+                </a>
+            </div>
         <%}%>
     </script>
     <!-- 渲染文章信息 -->

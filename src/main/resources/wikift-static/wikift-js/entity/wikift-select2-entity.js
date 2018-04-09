@@ -15,9 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-function WikiftNotifyEntity(title, message, icon, config) {
-    this.title = title;
-    this.message = message;
-    this.icon = icon;
+function WikiftSelect2Entity(id, config) {
+    this.id = id;
     this.config = config;
 }

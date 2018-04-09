@@ -59,7 +59,7 @@
                     <i class="zmdi zmdi-comment-alt-text"></i>
                 </a>
             </li>
-            <li th:if="${session.SPRING_SECURITY_CONTEXT}" class="dropdown hidden-xs-down">
+            <li th:if="${session.userInfo}" class="dropdown hidden-xs-down">
                 <a href="" data-toggle="dropdown">
                     <img class="dropdown--img" th:src="${session.userInfo.avatar}" />
                 </a>

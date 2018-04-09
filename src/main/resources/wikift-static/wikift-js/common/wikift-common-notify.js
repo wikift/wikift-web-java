@@ -31,6 +31,7 @@ var WikiftCommonNotify = function () {
     var initConfig = function (notify, config) {
         if (notify instanceof WikiftNotifyEntity) {
             var options = {};
+            options.icon = notify.icon;
             options.title = notify.title;
             options.message = notify.message;
             options.type = config.type;

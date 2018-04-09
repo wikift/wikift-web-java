@@ -75,7 +75,7 @@ public class WikiftSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests().
-                antMatchers("/", "/index/**").permitAll()
+                antMatchers(WikiftConstant.COMMON_MENU_ROOT, WikiftConstant.COMMON_MENU_INDEX_ALL).permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage(WikiftConstant.COMMON_MENU_AUTHENTICATION)
                 .successHandler(wikiftAuthenticationSuccessHandler).permitAll()

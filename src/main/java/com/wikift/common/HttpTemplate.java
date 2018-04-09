@@ -17,17 +17,23 @@
  */
 package com.wikift.common;
 
+import com.wikift.cache.WikiftCacheManager;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * HttpTemplate <br/>
@@ -44,6 +50,9 @@ public class HttpTemplate {
 
     @Autowired
     private HttpClient client;
+
+    @Autowired
+    private WikiftCacheManager cacheManager;
 
     private HttpResponse getRemoteResponse(String url, Map<String, String> headers) throws IOException {
         HttpGet get = new HttpGet(url);
@@ -80,6 +89,48 @@ public class HttpTemplate {
         } catch (IOException e) {
             throw new RuntimeException("access url" + url + " error!!!", e);
         }
+    }
+
+    private HttpResponse postRemoteResponse(String url, Map<String, String> headers, String data) throws IOException {
+        HttpPost post = new HttpPost(url);
+        if (!ObjectUtils.isEmpty(headers) && headers.size() > 0) {
+            headers.keySet().forEach(v -> {
+                post.setHeader(v, headers.get(v));
+            });
+        }
+        // 构建消息实体
+        StringEntity entity = new StringEntity(data, Charset.forName(default_encoding));
+        entity.setContentEncoding(default_encoding);
+        // 发送Json格式的数据请求
+        entity.setContentType("application/json");
+        post.setEntity(entity);
+        return client.execute(post);
+    }
+
+    public String postRemoteResponseToString(String url, String data) {
+        return this.postRemoteResponseToString(url, null, this.getHeaders(), data);
+    }
+
+    public String postRemoteResponseToString(String url, String encoding, Map<String, String> headers, String data) {
+        if (StringUtils.isEmpty(url)) {
+            throw new RuntimeException("url and encoding must no null");
+        }
+        try {
+            HttpResponse response = this.postRemoteResponse(url, headers, data);
+            if (!ObjectUtils.isEmpty(response)) {
+                return EntityUtils.toString(response.getEntity(), encoding);
+            }
+            return null;
+        } catch (IOException e) {
+            throw new RuntimeException("access url" + url + " error!!!", e);
+        }
+    }
+
+    public Map<String, String> getHeaders() {
+        Map<String, String> headers = new ConcurrentHashMap<>();
+        headers.put("Authorization", "Bearer " + cacheManager.get(WikiftConstant.CACHE_AUTHENTICATION_TOKEN).getValue());
+        headers.put("Content-Type", MediaType.APPLICATION_JSON_VALUE);
+        return headers;
     }
 
 }

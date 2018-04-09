@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.wikift.controller;
+package com.wikift.controller.rest;
 
 import com.wikift.common.HttpTemplate;
 import com.wikift.common.JsonTemplate;
@@ -24,12 +24,12 @@ import com.wikift.entity.RemoteServerEntity;
 import com.wikift.param.article.ArticleParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Controller;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * WriterController <br/>
@@ -39,9 +39,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * 创建时间 : 2018-04-08 下午2:43 <br/>
  * 联系作者 : <a href="mailTo:shichengoooo@163.com">qianmoQ</a>
  */
-@Controller
+@RestController
 @RequestMapping(value = "writer")
-public class WriterController {
+public class WriterRestController {
 
     @Autowired
     private HttpTemplate httpTemplate;
@@ -52,22 +52,14 @@ public class WriterController {
     @Autowired
     private Environment environment;
 
-    @RequestMapping(value = "/article", method = RequestMethod.GET)
-    public String articleWriter(Model model) {
+    @PreAuthorize("hasRole('USER')")
+    @RequestMapping(value = "/article/do", method = RequestMethod.POST)
+    public String articleWriterDo(@RequestBody ArticleParam param) {
         RemoteServerEntity remoteServer = new RemoteServerEntity(environment);
-        // 文章空间
-        String spaceApiPath = remoteServer.fullPath() + "space/list";
-        String spaces = httpTemplate.getRemoteResponseToString(spaceApiPath, httpTemplate.getHeaders());
-        model.addAttribute("spaces", jsonTemplate.getJsonObject(spaces));
-        // 文章标签
-        String tagApiPath = remoteServer.fullPath() + "public/article/tag/list";
-        String tags = httpTemplate.getRemoteResponseToString(tagApiPath);
-        model.addAttribute("tags", jsonTemplate.getJsonObject(tags));
-        // 文章类型
-        String typeApiPath = remoteServer.fullPath() + "article/type/list";
-        String types = httpTemplate.getRemoteResponseToString(typeApiPath, httpTemplate.getHeaders());
-        model.addAttribute("types", jsonTemplate.getJsonObject(types));
-        return WikiftConstant.TEMPLATE_WRITER_PAGE_PATH + "article";
+        String createApiPath = remoteServer.fullPath() + "article/create";
+        String result = httpTemplate.postRemoteResponseToString(createApiPath, jsonTemplate.toJson(param));
+        System.out.println(result);
+        return "SUCCESS";
     }
 
 }

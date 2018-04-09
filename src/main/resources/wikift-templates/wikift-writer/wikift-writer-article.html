@@ -22,7 +22,40 @@
 <body data-ma-theme="green">
 <div th:include="wikift-layout/common/wikift-layout-common-navigation::common-navigation"></div>
 <section class="content content--full" style="margin-top:72px; padding: 0;">
-    <div th:include="wikift-layout/common/wikift-layout-common-editor::common-editor"></div>
+    <div th:include="wikift-layout/common/wikift-layout-common-editor::common-editor(${spaces}, ${tags}, ${types})"></div>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        $('.btn-publish').click(function () {
+            var notify = new WikiftNotifyEntity('错误', '文章内容不能为空!!!');
+            var config = new WikiftNotifyConfigEntity();
+            config.type = 'danger';
+            config.icon = 'alert-triangle';
+            if (WikiftCommonEditor.getValue() === '') {
+                WikiftCommonNotify.initNotify(notify, config);
+                return false;
+            }
+            // 当前已经登录的用户信息
+            var userInfo = WikiftRemoteUserEntityUtils.getUserByJson([[${session.userInfo}]]);
+            // 文章空间信息
+            var spaceInfo = new WikiftRemoteSpaceEntity($('#space').val());
+            // 文章标签信息
+            var tagInfo = new WikiftRemoteArticleTagEntity($('#tag').val());
+            var tagArray = WikiftRemoteArticleTagEntityUtils.toArray(tagInfo);
+            // 文章类型信息
+            var typeInfo = new WikiftRemoteArticleTypeEntity($('#type').val());
+            var articleInfo = new WikiftRemoteArticleEntity(null, 'test', WikiftCommonEditor.getValue(), userInfo, typeInfo, tagArray, spaceInfo);
+            $.ajax({
+                type : "POST",
+                url : "/writer/article/do",
+                data : JSON.stringify(articleInfo),
+                contentType: "application/json",
+                success : function(result) {
+                    alert(result);
+                }
+            });
+        });
+        /*]]>*/
+    </script>
 </section>
 </body>
 </html>

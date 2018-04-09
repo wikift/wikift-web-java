@@ -15,9 +15,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-function WikiftNotifyEntity(title, message, icon, config) {
-    this.title = title;
-    this.message = message;
-    this.icon = icon;
-    this.config = config;
+function WikiftRemoteArticleTagEntity(id, name) {
+	this.id = id;
+	this.name = name;
 }
+
+var WikiftRemoteArticleTagEntityUtils = function () {
+
+    var toArray = function toArray(tag) {
+        if (typeof tag === "array") {
+        	return tag;
+        }
+        var array = new Array();
+        array.push(tag);
+        return array;
+    };
+
+    return {
+        toArray: toArray
+    }
+
+}();

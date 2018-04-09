@@ -15,9 +15,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-function WikiftNotifyEntity(title, message, icon, config) {
-    this.title = title;
-    this.message = message;
-    this.icon = icon;
-    this.config = config;
-}
+var WikiftUtilsJson = function () {
+
+    var isJson = function (json) {
+        if (json === 'undefiend' || json === '' || json === null) {
+            throw Error('data must not null');
+        }
+        try {
+            if (typeof json === "object" || typeof JSON.parse(json) === "object") {
+                return true;
+            }
+        } catch (e) {
+            console.log(e);
+            throw Error('json must not null');
+        }
+        return false;
+    };
+
+    var isString = function (str) {
+        if ('string' !== typeof str) {
+            return false;
+        } else {
+            return true;
+        }
+    };
+
+    return {
+        isJson: isJson
+    }
+
+}();

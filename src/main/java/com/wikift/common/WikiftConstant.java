@@ -35,12 +35,14 @@ public class WikiftConstant {
      */
     public static String TEMPLATE_INDEX_AND_ROOT_PAGE_PATH = "index";
     public static String TEMPLATE_INDEX_NAVBAR_AND_ROOT_PAGE_PATH = "wikift-index/wikift-index-navbar-";
+    public static String TEMPLATE_WRITER_PAGE_PATH = "wikift-writer/wikift-writer-";
     public static String TEMPLATE_AUTHENTICATION_LOGIN_PAGE_PATH = "wikift-authentication/wikift-login";
 
     /**
      * 全局导航
      */
     public static String COMMON_MENU_AUTHENTICATION = "/authentication/login";
+    public static String COMMON_MENU_INDEX_ALL = "/index/**";
     public static String COMMON_MENU_ROOT = "/";
 
     /**
