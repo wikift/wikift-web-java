@@ -42,8 +42,8 @@
     <div class="row">
         <div class="col-md-9">
             <div th:include="wikift-layout/index/wikift-layout-index-navbar::index-navbar(3)"></div>
-            <div th:include="wikift-layout/index/wikift-layout-index-navbar-data::index-navbar-data(${hottest})"></div>
-            <div class="center" th:include="wikift-layout/common/wikift-layout-common-pagination::common-pagination('index/navbar/recommend', ${hottest})"></div>
+            <div th:include="wikift-layout/index/wikift-layout-index-navbar-data::index-navbar-data(${recommend})"></div>
+            <div class="center" th:include="wikift-layout/common/wikift-layout-common-pagination::common-pagination('index/navbar/recommend', ${recommend})"></div>
         </div>
         <div class="col-md-3">
         </div>

@@ -18,6 +18,7 @@
 package com.wikift.controller;
 
 import com.wikift.common.HttpTemplate;
+import com.wikift.common.JsonTemplate;
 import com.wikift.common.PageTemplate;
 import com.wikift.common.WikiftConstant;
 import com.wikift.entity.RemoteServerEntity;
@@ -49,6 +50,9 @@ public class IndexController {
     private PageTemplate pageTemplate;
 
     @Autowired
+    private JsonTemplate jsonTemplate;
+
+    @Autowired
     private Environment environment;
 
     @RequestMapping(value = {"", "/{page}/{size}"}, method = RequestMethod.GET)
@@ -57,10 +61,10 @@ public class IndexController {
                         @PathVariable(value = "size", required = false) Integer size) {
         PageTemplate.PageEntity pageEntity = pageTemplate.checkPageParam(page, size);
         RemoteServerEntity remoteServer = new RemoteServerEntity(environment);
-        String result = httpTemplate.getRemoteResponseToString(remoteServer.fullPath() +
+        String latest = httpTemplate.getRemoteResponseToString(remoteServer.fullPath() +
                 "public/article/list?orderBy=NATIVE_CREATE_TIME&page=" + (pageEntity.getPage() - 1)
                 + "&size=" + pageEntity.getSize());
-        model.addAttribute("result", result);
+        model.addAttribute("latest", jsonTemplate.getJsonObject(latest));
         return WikiftConstant.TEMPLATE_INDEX_AND_ROOT_PAGE_PATH;
     }
 
@@ -75,10 +79,10 @@ public class IndexController {
                                 @PathVariable(value = "size", required = false) Integer size) {
         PageTemplate.PageEntity pageEntity = pageTemplate.checkPageParam(page, size);
         RemoteServerEntity remoteServer = new RemoteServerEntity(environment);
-        String result = httpTemplate.getRemoteResponseToString(remoteServer.fullPath() +
+        String hottest = httpTemplate.getRemoteResponseToString(remoteServer.fullPath() +
                 "public/article/list?orderBy=VIEW&page=" + (pageEntity.getPage() - 1)
                 + "&size=" + pageEntity.getSize());
-        model.addAttribute("hottest", result);
+        model.addAttribute("hottest", jsonTemplate.getJsonObject(hottest));
         return WikiftConstant.TEMPLATE_INDEX_NAVBAR_AND_ROOT_PAGE_PATH + "hottest";
     }
 
@@ -88,10 +92,10 @@ public class IndexController {
                                   @PathVariable(value = "size", required = false) Integer size) {
         PageTemplate.PageEntity pageEntity = pageTemplate.checkPageParam(page, size);
         RemoteServerEntity remoteServer = new RemoteServerEntity(environment);
-        String result = httpTemplate.getRemoteResponseToString(remoteServer.fullPath() +
+        String recommend = httpTemplate.getRemoteResponseToString(remoteServer.fullPath() +
                 "public/article/list?orderBy=FABULOU&page=" + (pageEntity.getPage() - 1)
                 + "&size=" + pageEntity.getSize());
-        model.addAttribute("hottest", result);
+        model.addAttribute("recommend", jsonTemplate.getJsonObject(recommend));
         return WikiftConstant.TEMPLATE_INDEX_NAVBAR_AND_ROOT_PAGE_PATH + "recommend";
     }
 

@@ -21,7 +21,7 @@
     <script th:inline="javascript">
         /*<![CDATA[*/
         // 抽取分页数据
-        var result = JSON.parse([[${result}]]);
+        var result = [[${result}]];
         $('.pagination').pagination({
             mode: 'fixed',
             coping: true,
