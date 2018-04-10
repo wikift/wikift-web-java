@@ -40,7 +40,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * 联系作者 : <a href="mailTo:shichengoooo@163.com">qianmoQ</a>
  */
 @Controller
-@RequestMapping(value = "index")
+@RequestMapping(value = "index", method = RequestMethod.GET)
 public class IndexController {
 
     @Autowired

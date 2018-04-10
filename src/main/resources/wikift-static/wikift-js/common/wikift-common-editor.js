@@ -33,19 +33,30 @@ var WikiftCommonEditor = function () {
         if (config === 'undefiend' || config === '' || config === null) {
             config = new WikiftEditorConfigEntity('100%', '100%', '/ws/wikift-vender/js/editor/lib/');
         }
-        CODE_EDITOR = editormd(editor.id, initConfig(config));
+        CODE_EDITOR = editormd(editor.id, initConfig(editor, config));
+    };
+
+    var initMarkdownToHTML = function (editor, config) {
+        if (editor === 'undefiend' || editor === '' || editor === null) {
+            editor = new WikiftEditorEntity(defaultEditorId, null, null);
+        }
+        if (config === 'undefiend' || config === '' || config === null) {
+            config = new WikiftEditorConfigEntity('100%', '100%', '/ws/wikift-vender/js/editor/lib/');
+        }
+        editormd.markdownToHTML(editor.id, initConfig(editor, config));
     };
 
     /**
      * init properties
      * @returns {{}}
      */
-    var initConfig = function (config) {
+    var initConfig = function (editor, config) {
         if (config instanceof WikiftEditorConfigEntity) {
             var options = {};
+            options.path = config.libPath;
             options.width = config.width;
             options.height = config.height;
-            options.path = config.libPath;
+            options.markdown = editor.markdown;
             return options;
         }
         throw Error('wikift editor config is error!');
@@ -85,6 +96,7 @@ var WikiftCommonEditor = function () {
 
     return {
         initEditor: initEditor,
+        initMarkdownToHTML: initMarkdownToHTML,
         setValue: setValue,
         getValue: getValue,
         clearValue: clearValue,

@@ -33,6 +33,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * WikiftSecurityConfig <br/>
  * 描述 : WikiftSecurityConfig <br/>
@@ -75,7 +78,7 @@ public class WikiftSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests().
-                antMatchers(WikiftConstant.COMMON_MENU_ROOT, WikiftConstant.COMMON_MENU_INDEX_ALL).permitAll()
+                antMatchers(whitePath()).permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage(WikiftConstant.COMMON_MENU_AUTHENTICATION)
                 .successHandler(wikiftAuthenticationSuccessHandler).permitAll()
@@ -85,6 +88,14 @@ public class WikiftSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().mvcMatchers(environment.getProperty(WikiftConstant.CONFIG_WEB_PREFIX + ".static-relative-location"));
+    }
+
+    private String[] whitePath() {
+        List<String> path = new ArrayList<>();
+        path.add(WikiftConstant.COMMON_MENU_ROOT);
+        path.add(WikiftConstant.COMMON_MENU_INDEX_ALL);
+        path.add(WikiftConstant.COMMON_MENU_ARTICLE_DETAILS);
+        return path.toArray(new String[path.size()]);
     }
 
 }

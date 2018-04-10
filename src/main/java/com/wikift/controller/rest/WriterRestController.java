@@ -17,6 +17,7 @@
  */
 package com.wikift.controller.rest;
 
+import com.alibaba.fastjson.JSONObject;
 import com.wikift.common.HttpTemplate;
 import com.wikift.common.JsonTemplate;
 import com.wikift.common.WikiftConstant;
@@ -58,7 +59,10 @@ public class WriterRestController {
         RemoteServerEntity remoteServer = new RemoteServerEntity(environment);
         String createApiPath = remoteServer.fullPath() + "article/create";
         String result = httpTemplate.postRemoteResponseToString(createApiPath, jsonTemplate.toJson(param));
-        System.out.println(result);
+        JSONObject object = jsonTemplate.getJsonObject(result);
+        if (object.getInteger("code") == 0) { // 如果code=0表示数据保存成功
+            return String.valueOf(object.getJSONObject("data").getInteger("id"));
+        }
         return "SUCCESS";
     }
 

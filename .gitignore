@@ -29,3 +29,4 @@ hs_err_pid*
 *.iml
 target/
 *.versionsBackup
+!/src/main/resources/wikift-templates/wikift-layout/common/wikift-layout-common-editor.html

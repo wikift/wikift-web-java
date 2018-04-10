@@ -360,7 +360,7 @@ body {
     font-weight: normal;
     line-height: 1.5;
     color: #707070;
-    background-color: #f3f3f3;
+    /*background-color: #f3f3f3;*/
 }
 
 [tabindex="-1"]:focus {
@@ -9049,7 +9049,7 @@ progress::-webkit-progress-bar {
 }
 
 .card {
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
+    /*box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);*/
     margin-bottom: 30px;
 }
 
@@ -12629,7 +12629,7 @@ textarea {
 .error__inner > h1 {
     font-size: 8rem;
     font-weight: bold;
-    color: #FFFFFF;
+    /*color: #FFFFFF;*/
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.03);
     line-height: 100%;
     margin-bottom: 1.5rem;

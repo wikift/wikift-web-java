@@ -19,6 +19,22 @@
 <div th:fragment="common-editor(spaces, tags, types)">
     <div th:include="wikift-layout/common/wikift-layout-common-script-editor::common-script-editor"></div>
     <div th:include="wikift-layout/common/wikift-layout-common-script-notify::common-script-notify"></div>
+    <div id="editor-toolbar" class="toolbar toolbar--inner mb-0">
+        <div class="toolbar__label col-2">
+            <div th:include="wikift-layout/common/wikift-layout-common-script-select2::common-script-select2('type', ${types})"></div>
+        </div>
+        <div class="toolbar__label col-8">
+            <div class="input-group">
+                <span class="input-group-addon">文章名</span>
+                <div class="form-group">
+                    <input type="text" id="editor-context-title" class="form-control" placeholder="请输入文章的标题名称">
+                    <i class="form-group__bar"></i>
+                </div>
+            </div>
+        </div>
+        <div class="actions toolbar__actions">
+        </div>
+    </div>
     <div id="wikift-editor"></div>
     <footer class="editor-footer">
         <div class="editor-footer-view">
@@ -30,9 +46,6 @@
                         </div>
                         <div class="col-sm-2">
                             <div th:include="wikift-layout/common/wikift-layout-common-script-select2::common-script-select2('tag', ${tags})"></div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div th:include="wikift-layout/common/wikift-layout-common-script-select2::common-script-select2('type', ${types})"></div>
                         </div>
                     </div>
                 </div>
@@ -47,7 +60,15 @@
         var editor = new WikiftEditorEntity('wikift-editor');
         var config = new WikiftEditorConfigEntity();
         config.libPath = '/ws/wikift-vender/js/editor/lib/';
-        config.height = $(window).height() - $('header').height() - 15 - $('footer').height();
+        // 当前窗口高度
+        var windowHeight = parseInt($(window).height());
+        // header头高度
+        var headerHeight = parseInt($('header').height());
+        // footer高度
+        var footerHeight = parseInt($('footer').height());
+        // 工具栏高度
+        var toobarHeight = parseInt($('#editor-toolbar').height());
+        config.height = windowHeight - (headerHeight + footerHeight + toobarHeight);
         // 初始化编辑器
         WikiftCommonEditor.initEditor(editor, config);
         /*]]>*/

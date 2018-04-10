@@ -16,13 +16,13 @@
   limitations under the License.
 -->
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:fragment="common-header(title, description)">
-    <meta charset="utf-8"/>
-    <title th:text="${title}"> - Wikift</title>
-    <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <meta th:content="${description}" name="description"/>
-    <meta content="qianmoQ" name="author"/>
-    <link rel="stylesheet" th:href="@{/ws/wikift-css/wikift-style.css}">
-    <link rel="stylesheet" th:href="@{/ws/wikift-css/wikift-style-header.css}">
-    <link rel="stylesheet" th:href="@{/ws/wikift-vender/css/material-design-iconic/css/material.design.iconic.min.css}">
-</head>
+<div th:fragment="common-script-editor-html">
+    <script th:src="@{/ws/wikift-vender/js/editor/lib/marked.min.js}"></script>
+    <script th:src="@{/ws/wikift-vender/js/editor/lib/prettify.min.js}"></script>
+    <script th:src="@{/ws/wikift-vender/js/editor/lib/raphael.min.js}"></script>
+    <script th:src="@{/ws/wikift-vender/js/editor/lib/underscore.min.js}"></script>
+    <script th:src="@{/ws/wikift-vender/js/editor/lib/sequence-diagram.min.js}"></script>
+    <script th:src="@{/ws/wikift-vender/js/editor/lib/flowchart.min.js}"></script>
+    <script th:src="@{/ws/wikift-vender/js/editor/lib/jquery.flowchart.min.js}"></script>
+    <div th:include="wikift-layout/common/wikift-layout-common-script-editor::common-script-editor"></div>
+</div>

@@ -34,7 +34,7 @@
             totalData: $('#totalElements').val(),
             pageCount: $('#totalPages').val(),
             showData: $('#size').val(),
-            current: $('#number').val() + 1,
+            current: parseInt($('#number').val()) + 1,
             callback: function (api) {
                 var currentRoot = window.document.location.href;
                 var pathName = window.document.location.pathname;

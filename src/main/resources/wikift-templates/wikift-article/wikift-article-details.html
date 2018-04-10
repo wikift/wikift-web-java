@@ -15,14 +15,15 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:fragment="common-header(title, description)">
-    <meta charset="utf-8"/>
-    <title th:text="${title}"> - Wikift</title>
-    <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <meta th:content="${description}" name="description"/>
-    <meta content="qianmoQ" name="author"/>
-    <link rel="stylesheet" th:href="@{/ws/wikift-css/wikift-style.css}">
-    <link rel="stylesheet" th:href="@{/ws/wikift-css/wikift-style-header.css}">
-    <link rel="stylesheet" th:href="@{/ws/wikift-vender/css/material-design-iconic/css/material.design.iconic.min.css}">
-</head>
+<head th:include="wikift-layout/common/wikift-layout-common-header::common-header(${details.data.title}, ${details.data.title})"></head>
+<div th:include="wikift-layout/common/wikift-layout-common-script::common-script"></div>
+<div th:include="wikift-layout/common/wikift-layout-common-script-editor::common-script-editor"></div>
+<body data-ma-theme="green">
+<div th:include="wikift-layout/common/wikift-layout-common-navigation::common-navigation(${details.data})"></div>
+<section class="content content--full">
+    <div th:include="wikift-layout/common/wikift-layout-common-editor-html::common-editor-html(${details.data})"></div>
+</section>
+</body>
+</html>
