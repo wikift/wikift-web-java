@@ -133,7 +133,6 @@
         return Plugin;
     })();
 
-
     /**
      * 这里是将Plugin对象 转为jq插件的形式进行调用
      * 定义一个插件 plugin

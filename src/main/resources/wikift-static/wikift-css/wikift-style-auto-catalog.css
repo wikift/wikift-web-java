@@ -15,15 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-* {
-    -webkit-box-sizing: content-box;
-    -moz-box-sizing: content-box;
-    box-sizing: content-box
-}
-
-li {
-    list-style: none;
-}
 
 a {
     text-decoration: none;
@@ -40,7 +31,7 @@ a:focus {
 
 .autoMenu {
     position: fixed;
-    top: 33%;
+    bottom: 45px;
     right: 2%;
     z-index: 1;
     text-align: left;
@@ -53,6 +44,10 @@ a:focus {
     -webkit-box-shadow: 0 0 10px #CCC;
     -moz-box-shadow: 0 0 10px #CCC;
     box-shadow: 0 0 10px #CCC;
+}
+
+.autoMenu ul > li {
+    list-style: none;
 }
 
 .autoMenu ul > li.sub {
@@ -96,7 +91,6 @@ a:focus {
     border-radius: 1px;
     position: absolute;
     top: 3px;
-    left: 11.5px;
 }
 
 .icon-plus-sign:after {
@@ -123,6 +117,5 @@ a:focus {
     background: #fff;
     border-radius: 1px;
     position: absolute;
-    left: 3px;
     top: 11.5px;
 }

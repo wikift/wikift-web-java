@@ -37,4 +37,10 @@ $(document).ready(function () {
             }
         });
     }
+    /**
+     * tooltip
+     */
+    if($('[data-toggle="tooltip"]')[0]) {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
 });

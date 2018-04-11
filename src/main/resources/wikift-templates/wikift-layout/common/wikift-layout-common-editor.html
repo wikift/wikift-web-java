@@ -16,6 +16,7 @@
   limitations under the License.
 -->
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
+<!-- 文章编辑器 -->
 <div th:fragment="common-editor(spaces, tags, types)">
     <div th:include="wikift-layout/common/wikift-layout-common-script-editor::common-script-editor"></div>
     <div th:include="wikift-layout/common/wikift-layout-common-script-notify::common-script-notify"></div>
@@ -69,6 +70,33 @@
         // 工具栏高度
         var toobarHeight = parseInt($('#editor-toolbar').height());
         config.height = windowHeight - (headerHeight + footerHeight + toobarHeight);
+        // 初始化编辑器
+        WikiftCommonEditor.initEditor(editor, config);
+        /*]]>*/
+    </script>
+</div>
+<!-- 评论编辑器 -->
+<div th:fragment="common-editor-commnet">
+    <div th:include="wikift-layout/common/wikift-layout-common-script-editor::common-script-editor"></div>
+    <div th:include="wikift-layout/common/wikift-layout-common-script-notify::common-script-notify"></div>
+    <div id="wikift-editor" style="z-index: 8;"></div>
+    <footer class="editor-footer">
+        <div class="editor-footer-view">
+            <div class="listview__content">
+                <div class="listview__heading"></div>
+            </div>
+            <div class="listview__content__right center">
+                <button type="submit" class="btn btn-primary btn-publish">发表评论</button>
+            </div>
+        </div>
+    </footer>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var editor = new WikiftEditorEntity('wikift-editor');
+        editor.toolbarIcons = ['bold', 'del', 'italic', 'quote', '|', 'code', 'hr', '|', 'watch', 'preview'];
+        var config = new WikiftEditorConfigEntity();
+        config.libPath = '/ws/wikift-vender/js/editor/lib/';
+        config.height = 200;
         // 初始化编辑器
         WikiftCommonEditor.initEditor(editor, config);
         /*]]>*/
