@@ -17,6 +17,7 @@
  */
 package com.wikift.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.wikift.common.HttpTemplate;
 import com.wikift.common.JsonTemplate;
 import com.wikift.common.WikiftConstant;
@@ -55,8 +56,15 @@ public class ArticleController {
                        @PathVariable(value = "id") Integer id) {
         String accessInfo = "public/article/info/" + id;
         RemoteServerEntity remoteServer = new RemoteServerEntity(environment);
-        String details = httpTemplate.getRemoteResponseToString(remoteServer.fullPath() + accessInfo);
-        model.addAttribute("details", jsonTemplate.getJsonObject(details));
+        String result = httpTemplate.getRemoteResponseToString(remoteServer.fullPath() + accessInfo);
+        JSONObject details = jsonTemplate.getJsonObject(result);
+        model.addAttribute("details", details);
+        // 文章评论信息
+        Integer detailsId = details.getJSONObject("data").getInteger("id");
+        String commentPath = "public/comment/list?articleId=" + detailsId;
+        String commentResult = httpTemplate.getRemoteResponseToString(remoteServer.fullPath() + commentPath);
+        JSONObject comments = jsonTemplate.getJsonObject(commentResult);
+        model.addAttribute("comments", comments);
         return WikiftConstant.TEMPLATE_ARTICLE_PAGE_PATH + "details";
     }
 

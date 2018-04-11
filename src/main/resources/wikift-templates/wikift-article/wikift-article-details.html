@@ -23,7 +23,29 @@
 <body data-ma-theme="green">
 <div th:include="wikift-layout/common/wikift-layout-common-navigation::common-navigation(${details.data})"></div>
 <section class="content content--full">
-    <div th:include="wikift-layout/common/wikift-layout-common-editor-html::common-editor-html(${details.data})"></div>
+    <div class="row">
+        <div class="col-9">
+            <!-- 文章基本信息 -->
+            <div th:include="wikift-layout/common/wikift-layout-common-details-description::common-details-description(${details.data}, ${details.data.articleType})"></div>
+            <!-- 文章内容 -->
+            <div th:include="wikift-layout/common/wikift-layout-common-details-html::common-details-html('article-content', ${details.data.content})"></div>
+            <!-- 文章标签 -->
+            <div th:include="wikift-layout/common/wikift-layout-common-details-tags::common-details-tags(${details.data.articleTags})"></div>
+            <!-- 评论编辑器 -->
+            <div th:include="wikift-layout/common/wikift-layout-common-details-comment::common-details-comment"></div>
+            <!-- 评论列表 -->
+            <div th:include="wikift-layout/common/wikift-layout-common-details-comment::common-details-comment-list(${comments.data.content})"></div>
+            <!-- 文章尾部小工具 -->
+            <!--<div class="card-header bg-light-blue">-->
+            <!--<div class="widget-calendar__year"></div>-->
+            <!--<div class="widget-calendar__day"></div>-->
+            <!--</div>-->
+        </div>
+        <div class="col-3">
+            <div id="container">
+            </div>
+        </div>
+    </div>
 </section>
 </body>
 </html>
