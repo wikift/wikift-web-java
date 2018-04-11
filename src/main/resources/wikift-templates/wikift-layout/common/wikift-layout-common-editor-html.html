@@ -19,20 +19,30 @@
 <div th:fragment="common-editor-html(details)">
     <div th:include="wikift-layout/common/wikift-layout-common-script-editor-html::common-script-editor-html"></div>
     <div th:include="wikift-layout/common/wikift-layout-common-script-notify::common-script-notify"></div>
-    <div class="card">
-        <div class="card-header">
-            <h2 class="card-title" th:text="${details.title}"></h2>
-            <small class="card-subtitle"></small>
+    <div class="row">
+        <div class="col-9">
+            <div class="card">
+                <!--<div class="card-header">-->
+                <!--<h2 class="card-title" th:text="${details.title}"></h2>-->
+                <!--<small class="card-subtitle"></small>-->
+                <!--</div>-->
+                <div class="card-block">
+                    <div id="wikift-editor-html"></div>
+                </div>
+            </div>
         </div>
-        <div class="card-block">
-            <div id="wikift-editor-html"></div>
-            <script th:inline="javascript">
-                /*<![CDATA[*/
-                var editor = new WikiftEditorEntity('wikift-editor-html', [[${details.content}]]);
-                var config = new WikiftEditorConfigEntity();
-                WikiftCommonEditor.initMarkdownToHTML(editor, config);
-                /*]]>*/
-            </script>
+        <div class="col-3">
+            <div id="container">
+                <div th:include="wikift-layout/common/wikift-layout-common-auto-catalog::common-auto-catalog"></div>
+            </div>
         </div>
     </div>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        // var editor = new WikiftEditorEntity('wikift-editor-html', [[${details.content}]], '#container');
+        var editor = new WikiftEditorEntity('wikift-editor-html', [[${details.content}]]);
+        var config = new WikiftEditorConfigEntity();
+        WikiftCommonEditor.initMarkdownToHTML(editor, config);
+        /*]]>*/
+    </script>
 </div>

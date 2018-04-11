@@ -57,6 +57,7 @@ var WikiftCommonEditor = function () {
             options.width = config.width;
             options.height = config.height;
             options.markdown = editor.markdown;
+            options.tocContainer = editor.tocContainer;
             return options;
         }
         throw Error('wikift editor config is error!');

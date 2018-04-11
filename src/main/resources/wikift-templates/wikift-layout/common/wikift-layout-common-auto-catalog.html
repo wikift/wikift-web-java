@@ -16,14 +16,15 @@
   limitations under the License.
 -->
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:fragment="common-header(title, description)">
-    <meta charset="utf-8"/>
-    <title th:text="${title}"> - Wikift</title>
-    <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <meta th:content="${description}" name="description"/>
-    <meta content="qianmoQ" name="author"/>
-    <link rel="stylesheet" th:href="@{/ws/wikift-css/wikift-style.css}">
-    <link rel="stylesheet" th:href="@{/ws/wikift-css/wikift-style-header.css}">
-    <link rel="stylesheet" th:href="@{/ws/wikift-css/wikift-style-cards.css}">
-    <link rel="stylesheet" th:href="@{/ws/wikift-vender/css/material-design-iconic/css/material.design.iconic.min.css}">
-</head>
+<div th:fragment="common-auto-catalog">
+    <link rel="stylesheet" th:href="@{/ws/wikift-css/wikift-style-auto-catalog.css}">
+    <script th:src="@{/ws/wikift-js/common/wikift-common-auto-catalog.js}"></script>
+    <div class="autoMenu" id="auto-catalog" data-autoMenu></div>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        $(function () {
+            $('#auto-catalog').autoMenu();
+        })
+        /*]]>*/
+    </script>
+</div>
