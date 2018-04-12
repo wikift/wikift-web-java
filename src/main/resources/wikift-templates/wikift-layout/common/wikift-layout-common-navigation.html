@@ -78,6 +78,7 @@
                 </a>
             </li>
             <li th:if="${session.userInfo}" class="dropdown hidden-xs-down">
+                <input type="hidden" id="website-access-user" th:value="${session.userInfo.id}" />
                 <a href="" data-toggle="dropdown">
                     <img class="dropdown--img" th:src="${session.userInfo.avatar}"/>
                 </a>
