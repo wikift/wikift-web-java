@@ -27,6 +27,7 @@ package com.wikift.common;
  */
 public class WikiftConstant {
 
+    public static String CONFIG_SYSTEM_PREFIX = "wikift.system.";
     public static String CONFIG_WEB_PREFIX = "wikift.web.config";
     public static String CONFIG_SERVER_PREFIX = "wikift.server.config";
 

@@ -36,7 +36,7 @@
 }
 
 .user__header__info:hover {
-    background-color: rgba(0, 0, 0, 0.03);
+    /*background-color: rgba(0, 0, 0, 0.03);*/
 }
 
 .user__header__img {
@@ -47,10 +47,10 @@
 }
 
 .user__header__name {
-    color: #333;
+    /*color: #333;*/
     font-weight: 500;
 }
 
 .user__header__email {
-    color: #969696;
+    /*color: #969696;*/
 }

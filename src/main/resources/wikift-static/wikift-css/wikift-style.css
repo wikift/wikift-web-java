@@ -13855,3 +13855,10 @@ span.flatpickr-weekday {
     transition: background-color 300ms;
     /*border-bottom: 1px solid #eee;*/
 }
+
+.header-split-line {
+    height: 29px;
+    width: 1px;
+    background-color: #f1f1;
+    margin-right: 10px;
+}

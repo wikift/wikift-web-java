@@ -25,19 +25,26 @@
                 <i class="navigation-trigger__line"></i>
             </div>
         </div>
+        <!-- 网站名称 -->
+        <div class="header__logo hidden-sm-down" style="padding: 1em;">
+            <h1><a href="/" th:text="${websiteName + ' ' + websiteVersion}"></a></h1>
+        </div>
+        <div th:unless="${description == null}" class="header-split-line"></div>
         <!-- 文章标题用户信息 -->
         <div th:unless="${description == null}" class="user__header">
             <div class="user__header__info" data-toggle="dropdown">
                 <img class="user__header__img" th:src="${description.user.avatar}" alt="${description.user.username}"/>
                 <div>
                     <div class="user__header__name" th:text="${description.user.aliasName}"></div>
-                    <!--<div class="user__header__email" th:text="${description.user.signature}"></div>-->
+                    <div class="user__header__email">
+                        <button class="btn btn-primary btn-sm waves-effect">关注</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- 顶部站点标题 -->
+        <div th:unless="${description == null}" class="header-split-line"></div>
+        <!-- 文章标题 -->
         <div class="header__logo hidden-sm-down">
-            <h1 th:if="${description == null}"><a href="/">Wikift 1.0</a></h1>
             <h1 th:unless="${description == null}"><a href="" th:text="${description.title}"></a></h1>
         </div>
         <!-- 顶部搜索表单 -->
