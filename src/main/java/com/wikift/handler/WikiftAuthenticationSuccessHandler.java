@@ -73,7 +73,7 @@ public class WikiftAuthenticationSuccessHandler implements AuthenticationSuccess
         // 将授权用户信息抽取到session中
         session.setAttribute("userInfo", userInfo);
         if (accessPath.equals(WikiftConstant.COMMON_MENU_AUTHENTICATION)) {
-            response.sendRedirect(WikiftConstant.COMMON_MENU_ROOT);
+            response.sendRedirect(WikiftConstant.COMMON_WHITE_LIST_ROOT);
         } else {
             response.sendRedirect(accessPath);
         }

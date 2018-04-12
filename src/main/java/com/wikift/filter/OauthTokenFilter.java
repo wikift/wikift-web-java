@@ -46,8 +46,8 @@ public class OauthTokenFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         whiteList.add(WikiftConstant.COMMON_MENU_AUTHENTICATION);
-        whiteList.add(WikiftConstant.COMMON_MENU_INDEX_ALL);
-        whiteList.add(WikiftConstant.COMMON_MENU_ROOT);
+        whiteList.add(WikiftConstant.COMMON_WHITE_LIST_INDEX_ALL);
+        whiteList.add(WikiftConstant.COMMON_WHITE_LIST_ROOT);
     }
 
     @Override

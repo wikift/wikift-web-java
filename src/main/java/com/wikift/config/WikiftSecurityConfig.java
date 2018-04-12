@@ -92,9 +92,10 @@ public class WikiftSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private String[] whitePath() {
         List<String> path = new ArrayList<>();
-        path.add(WikiftConstant.COMMON_MENU_ROOT);
-        path.add(WikiftConstant.COMMON_MENU_INDEX_ALL);
-        path.add(WikiftConstant.COMMON_MENU_ARTICLE_DETAILS);
+        path.add(WikiftConstant.COMMON_WHITE_LIST_ROOT);
+        path.add(WikiftConstant.COMMON_WHITE_LIST_INDEX_ALL);
+        path.add(WikiftConstant.COMMON_WHITE_LIST_ARTICLE_DETAILS);
+        path.add(WikiftConstant.COMMON_WHITE_LIST_AUTHENTICATION);
         return path.toArray(new String[path.size()]);
     }
 

@@ -35,6 +35,7 @@ public class UserParam {
     private Long id;
     private String username;
     private String password;
+    private String repassword;
     private String avatar;
     private String aliasName;
     private String signature;

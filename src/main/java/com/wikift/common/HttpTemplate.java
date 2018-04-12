@@ -111,6 +111,10 @@ public class HttpTemplate {
         return this.postRemoteResponseToString(url, null, this.getHeaders(), data);
     }
 
+    public String postRemoteResponseToStringNoHeader(String url, String data) {
+        return this.postRemoteResponseToString(url, null, null, data);
+    }
+
     public String postRemoteResponseToString(String url, String encoding, Map<String, String> headers, String data) {
         if (StringUtils.isEmpty(url)) {
             throw new RuntimeException("url and encoding must no null");

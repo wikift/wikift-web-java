@@ -15,10 +15,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-function WikiftRemoteUserEntity(id, username, password, avatar, aliasName, signature, email, active, lock) {
+function WikiftRemoteUserEntity(id, username, password, repassword, avatar, aliasName, signature, email, active, lock) {
     this.id = id;
     this.username = username;
     this.password = password;
+    this.repassword = repassword;
     this.avatar = avatar;
     this.aliasName = aliasName;
     this.signature = signature;

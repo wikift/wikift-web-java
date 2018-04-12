@@ -49,7 +49,12 @@ public class AuthenticationController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String authenticationLogin() {
-        return WikiftConstant.TEMPLATE_AUTHENTICATION_LOGIN_PAGE_PATH;
+        return WikiftConstant.TEMPLATE_AUTHENTICATION_LOGIN_PAGE_PATH + "login";
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String authenticationRegister() {
+        return WikiftConstant.TEMPLATE_AUTHENTICATION_LOGIN_PAGE_PATH + "register";
     }
 
     @PreAuthorize("hasRole('USER')")

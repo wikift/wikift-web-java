@@ -24,8 +24,9 @@
         <div class="login__block active">
             <div class="login__block__header">
                 <i class="zmdi zmdi-account-circle"></i>
-                欢迎使用Wikift系统
+                欢迎使用Wikift知识库管理系统
             </div>
+            <div th:include="wikift-layout/authentication/wikift-layout-authentication-navbar::authentication-navbar(1)"></div>
             <div class="login__block__body">
                 <div th:if="${param.error}" class="alert alert-danger" role="alert">
                     <strong>登录失败!</strong> 请检查您的用户名或密码
@@ -40,7 +41,10 @@
                     <label>密码</label>
                     <i class="form-group__bar"></i>
                 </div>
-                <button class="btn btn--icon login__block__btn">登录</button>
+                <button class="btn btn--icon login__block__btn" th:title="点击我登录系统"
+                        data-toggle="tooltip" data-placement="top">
+                    <i class="zmdi zmdi-long-arrow-right"></i>
+                </button>
             </div>
         </div>
     </div>
