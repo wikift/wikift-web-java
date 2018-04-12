@@ -65,7 +65,7 @@
                 });
             </script>
             <!-- 评论列表 -->
-            <div th:include="wikift-layout/common/wikift-layout-common-details-comment::common-details-comment-list(${comments.data.content})"></div>
+            <div th:include="wikift-layout/common/wikift-layout-common-details-comment::common-details-comment-list(${comments.data.totalElements}, ${comments.data.content})"></div>
             <!-- 文章尾部小工具 -->
             <!--<div class="card-header bg-light-blue">-->
             <!--<div class="widget-calendar__year"></div>-->
