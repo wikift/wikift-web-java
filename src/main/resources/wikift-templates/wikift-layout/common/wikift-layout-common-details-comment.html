@@ -81,7 +81,7 @@
             <div th:if="${#arrays.length(comments) > 0}" th:each="comment, index : ${comments}" class="messages__item">
                 <img th:src="${comment.user.avatar}" class="messages__avatar" th:alt="${comment.user.aliasName}"/>
                 <div class="messages__details">
-                    <div th:include="wikift-layout/common/wikift-layout-common-details-html::common-details-html(${comment.id},${comment.content})"></div>
+                    <div th:include="wikift-layout/common/wikift-layout-common-details-html::common-details-html(${comment.id}, ${comment.content}, null)"></div>
                     <small>
                         <i class="zmdi zmdi-time"></i>
                         <em th:text="${#dates.format(comment.createTime,'yyyy年MM月dd日 HH:mm:ss')}"></em>

@@ -16,9 +16,16 @@
   limitations under the License.
 -->
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<div th:fragment="common-details-html(id, details)">
-    <div th:include="wikift-layout/common/wikift-layout-common-script-editor-html::common-script-editor-html"></div>
-    <div th:include="wikift-layout/common/wikift-layout-common-script-notify::common-script-notify"></div>
+<!--
+id: 组件的唯一ID标识
+details: 组件详细展示数据
+loadScript: 是否加载组件JS脚本, 默认不加载
+-->
+<div th:fragment="common-details-html(id, details, loadScript)">
+    <div th:if="${loadScript}">
+        <div th:include="wikift-layout/common/wikift-layout-common-script-editor-html::common-script-editor-html"></div>
+        <div th:include="wikift-layout/common/wikift-layout-common-script-notify::common-script-notify"></div>
+    </div>
     <div th:id="${id}"></div>
     <script th:inline="javascript">
         /*<![CDATA[*/

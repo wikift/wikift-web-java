@@ -29,7 +29,7 @@
             <!-- 文章基本信息 -->
             <div th:include="wikift-layout/common/wikift-layout-common-details-description::common-details-description(${details.data}, ${details.data.articleType})"></div>
             <!-- 文章内容 -->
-            <div th:include="wikift-layout/common/wikift-layout-common-details-html::common-details-html(${details.data.id}, ${details.data.content})"></div>
+            <div th:include="wikift-layout/common/wikift-layout-common-details-html::common-details-html(${details.data.id}, ${details.data.content}, null)"></div>
             <!-- 文章标签 -->
             <div th:include="wikift-layout/common/wikift-layout-common-details-tags::common-details-tags(${details.data.articleTags})"></div>
             <!-- 评论编辑器 -->
