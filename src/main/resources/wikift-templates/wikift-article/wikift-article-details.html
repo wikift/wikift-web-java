@@ -55,7 +55,8 @@
                                     notify.message = result.message;
                                     WikiftCommonNotify.initNotify(notify, config);
                                 } else {
-                                    alert('评论发送成功!刷新页面即可看到您的评论!!!');
+                                    alert('评论发送成功!点击确定即可看到您的评论!!!');
+                                    window.location.reload();
                                 }
                             }
                         });
@@ -74,7 +75,7 @@
         </div>
         <div class="col-3">
             <div id="container">
-                <div th:include="wikift-layout/common/wikift-layout-common-auto-catalog::common-auto-catalog"></div>
+                <!--<div th:include="wikift-layout/common/wikift-layout-common-auto-catalog::common-auto-catalog"></div>-->
             </div>
         </div>
     </div>

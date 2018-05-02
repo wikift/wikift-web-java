@@ -32,8 +32,8 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" th:classappend="${activeIndex == 4} ? 'active'"
-               th:if="${session.SPRING_SECURITY_CONTEXT}"
-               th:href="@{/index/navbar/forme}">我的文章</a>
+               th:if="${session.userInfo}"
+               th:href="@{'/index/navbar/forme/' + ${session.userInfo.id}}">我的文章</a>
         </li>
     </ul>
 </div>

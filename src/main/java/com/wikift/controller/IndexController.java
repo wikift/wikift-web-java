@@ -17,6 +17,7 @@
  */
 package com.wikift.controller;
 
+import com.wikift.cache.WikiftCacheManager;
 import com.wikift.common.HttpTemplate;
 import com.wikift.common.JsonTemplate;
 import com.wikift.common.PageTemplate;
@@ -54,6 +55,9 @@ public class IndexController {
 
     @Autowired
     private Environment environment;
+
+    @Autowired
+    private WikiftCacheManager cacheManager;
 
     @RequestMapping(value = {"", "/{page}/{size}"}, method = RequestMethod.GET)
     public String index(Model model,
@@ -100,13 +104,19 @@ public class IndexController {
     }
 
     @PreAuthorize(value = "hasRole('USER')")
-    @RequestMapping(value = {"navbar/forme", "navbar/forme/{page}/{size}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"navbar/forme/{userId}", "navbar/forme/{page}/{size}/{userId}"}, method = RequestMethod.GET)
     public String navbarForme(Model model,
+                              @PathVariable(value = "userId", required = true) Integer userId,
                               @PathVariable(value = "page", required = false) Integer page,
                               @PathVariable(value = "size", required = false) Integer size) {
-//        RemoteServerEntity remoteServer = new RemoteServerEntity(environment);
-//        String result = httpTemplate.getRemoteResponseToString(remoteServer.fullPath() + "public/article/list?orderBy=FABULOU");
-//        model.addAttribute("forme", result);
+        PageTemplate.PageEntity pageEntity = pageTemplate.checkPageParam(page, size);
+        RemoteServerEntity remoteServer = new RemoteServerEntity(environment);
+        String result = httpTemplate.getRemoteResponseToString(
+                remoteServer.fullPath() +
+                        String.format("article/my?page=%s&size=%s&userId=%s", (pageEntity.getPage() - 1), pageEntity.getSize(), userId),
+                httpTemplate.getHeaders());
+        System.out.println(result);
+        model.addAttribute("forme", jsonTemplate.getJsonObject(result));
         return WikiftConstant.TEMPLATE_INDEX_NAVBAR_AND_ROOT_PAGE_PATH + "forme";
     }
 
